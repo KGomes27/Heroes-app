@@ -23,3 +23,10 @@ before_script:
 script:
   - xvfb-run npm run test
   - xvfb-run npm run test:integration
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: build/es5-bundled
+  github_token: $GITHUB-PAGE-DEPLOY # Set in travis-ci.org dashboard
+  on:
+    branch: master
