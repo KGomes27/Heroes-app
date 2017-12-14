@@ -32,14 +32,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </test-fixture>
 
   <script>
-    suite('home-view unit testing', function () {
-      test('We must have an h1 title', function () {
+    suite('home-view unit testing', function() {
+      test('We must have an h1 title', function() {
         var myView = fixture('BasicView');
         var h1 = myView.shadowRoot.querySelector('h1');
-        //assert h1 to not be undefined
-        expect(h1).to.not.be.an('undefined');
-        //assert.exists(h1, 'h1 is neither "null" nor "undefined"');
-        //assert.equal(circle.textContent, '1');
+        expect(h1).to.not.be.undefined;
       });
     });
   </script>
