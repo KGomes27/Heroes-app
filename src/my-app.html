@@ -138,6 +138,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (!page) {
           // set default route if route path is empty
           this.set('route.path', 'home');
+          this.page = 'home';
           return;
         }
 
@@ -146,6 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
+        page = page === 'Heroes-app' ? 'home' : page;
         var currentView = page === 'home' ? page + '-view' : 'my-' + page;
         var resolvedPageUrl = this.resolveUrl(currentView + '.html');
         Polymer.importHref(
