@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="search-box">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `search-box`
+     * search box components
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SearchBox extends Polymer.Element {
+      static get is() { return 'search-box'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'search-box'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(SearchBox.is, SearchBox);
+  </script>
+</dom-module>
