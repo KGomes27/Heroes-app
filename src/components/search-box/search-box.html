@@ -1,0 +1,71 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-input/iron-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<dom-module id="search-box">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 0.5rem 0;
+      }
+
+      .search-box-wrapper {
+        display: flex;
+      }
+
+      iron-input {
+        flex-grow: 1;
+        margin-right: 0.5rem;
+        padding-right: 2rem;
+      }
+
+      input {
+        height: 90%;
+        font-size: 20px;
+        width: 100%;
+        padding-left: 2rem;
+      }
+
+      paper-button {
+        --paper-button-ink-color: red;
+      }
+    </style>
+
+    <div class="search-box-wrapper">
+      <iron-input bind-value="{{value}}">
+        <input placeholder="[[placeholder]]" is="iron-input">
+      </iron-input>
+      <paper-button raised on-click="onSearchClicked">Buscar</paper-button>
+    </div>
+
+  </template>
+
+  <script>
+    class SearchBox extends Polymer.Element {
+      static get is() { return 'search-box'; }
+      static get properties() {
+        return {
+          value: String,
+          placeholder: {
+            type: String,
+            value: 'Buscar...',
+          },
+        };
+      }
+      onSearchClicked() {
+        if(this.value) {
+          this.dispatchEvent(
+            new CustomEvent('searchBoxDoSearch', {
+              composed: true,
+              detail: {value: this.value},
+            })
+          );
+        }
+      }
+    }
+    customElements.define(SearchBox.is, SearchBox);
+  </script>
+
+</dom-module>
