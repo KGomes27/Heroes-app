@@ -23,6 +23,9 @@ before_script:
 script:
   - xvfb-run npm run test
   - xvfb-run npm run test:integration
+branches:
+  only:
+    - "master"
 deploy:
   provider: pages
   skip_cleanup: true
