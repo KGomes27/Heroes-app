@@ -44,19 +44,24 @@
 
   <script>
     class SearchBox extends Polymer.Element {
-      static get is() { return "search-box"; }
+      static get is() { return 'search-box'; }
       static get properties() {
         return {
           value: String,
           placeholder: {
             type: String,
-            value: 'Buscar...'
-          }
-        }
+            value: 'Buscar...',
+          },
+        };
       }
       onSearchClicked() {
         if(this.value) {
-          this.dispatchEvent(new CustomEvent('searchBoxDoSearch', { composed: true, detail: { value: this.value } }));
+          this.dispatchEvent(
+            new CustomEvent('searchBoxDoSearch', {
+              composed: true,
+              detail: {value: this.value},
+            })
+          );
         }
       }
     }
