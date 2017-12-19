@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
 
 <dom-module id="heroes-list">
   <template>
@@ -7,9 +8,13 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
-  </template>
 
+    <template is="dom-repeat" items="{{heroes}}">
+      <div># [[index]]</div>
+    </template>
+
+  </template>
+  
   <script>
     /**
      * `heroes-list`
@@ -23,9 +28,11 @@
       static get is() { return 'heroes-list'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'heroes-list',
+          heroes: {
+            type: Array,
+            value: function() {
+              return [];
+            },
           },
         };
       }
