@@ -1,0 +1,83 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<script src="../js-md5/build/md5.min.js"></script>
+
+<dom-module id="dp-heroes">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-ajax
+      id="heroes"
+      auto=[[auto]]
+      url="[[url]]"
+      params='{{params}}'
+      handle-as="json"
+      on-response="onSearchDone">
+    </iron-ajax>
+  </template>
+
+  <script>
+    /**
+     * `dp-heroes`
+     * heroes Data Provider
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class DpHeroes extends Polymer.Element {
+      static get is() { return 'dp-heroes'; }
+      static get properties() {
+        return {
+          heroName: {
+            type: String,
+            value: '',
+          },
+          params: {
+            type: String,
+            computed: 'getParams(heroName)',
+          },
+          url: {
+            type: String,
+            value: 'https://gateway.marvel.com:443/v1/public/characters',
+          },
+          auto: Boolean,
+        };
+      }
+
+      getParams(heroName) {
+        let ts = new Date().getTime();
+        let apikey = '620fba11ee7de546919f88b4eeebedba';
+        let privateKey = '228d40f4d470d9a8704af14a9512f4d4d274c256';
+        let params = {
+          ts: ts,
+          apikey: apikey,
+          hash: md5.hex(ts + privateKey + apikey)
+        };
+        if(heroName) {
+          params.name = heroName;
+        }
+        return params;
+      }
+
+      doSearch() {
+        this.$.heroes.generateRequest();
+      }
+
+      onSearchDone(event) {
+        let response = event.target.lastResponse.data;
+        this.dispatchEvent(
+          new CustomEvent('onHeroesFound', {
+            composed: true,
+            detail: { value: response },
+          })
+        );
+      }
+    }
+
+    window.customElements.define(DpHeroes.is, DpHeroes);
+  </script>
+</dom-module>
