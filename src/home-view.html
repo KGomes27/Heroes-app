@@ -1,6 +1,7 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/search-box/search-box.html">
+<link rel="import" href="../bower_components/dp-heroes/dp-heroes.html">
 
 <dom-module id="home-view">
   <!-- Defines the element's style and local DOM -->
@@ -14,6 +15,7 @@
     </style>
 
     <search-box placeholder="Buscar superhéroe..."></search-box>
+    <dp-heroes hero-name={{hero}} id="heroSearch"></dp-heroes>
   </template>
   <script>
     // Your new element extends the Polymer.Element base class
@@ -25,6 +27,7 @@
             type: Array,
             value: function() { return []; },
           },
+          hero: String,
         };
       }
 
@@ -32,13 +35,19 @@
         super.ready();
         this.addEventListener('searchBoxDoSearch', this._searchHeroes);
       }
+
       _searchHeroes(event) {
         console.log(event.detail.value);
-        // this._findHeroes(event.detail.value);
+        this._findHeroes(event.detail.value);
+      }
+
+      _findHeroes(heroName) {
+        this.hero = heroName;
+        this.$.heroSearch.doSearch();
       }
 
     }
-    // Now, register your new custom element so the browser can use it
+
     customElements.define(HomeView.is, HomeView);
   </script>
 </dom-module>
