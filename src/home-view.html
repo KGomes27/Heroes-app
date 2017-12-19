@@ -34,6 +34,7 @@
       ready() {
         super.ready();
         this.addEventListener('searchBoxDoSearch', this._searchHeroes);
+        this.$.heroSearch.doSearch();
       }
 
       _searchHeroes(event) {
