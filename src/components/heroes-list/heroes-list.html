@@ -1,0 +1,45 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="heroes-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <template is="dom-repeat" items="{{heroes}}">
+      <div># [[index]]</div>
+      <p>[[item.name]]</p>
+      <p>[[item.description]]</p>
+    </template>
+
+  </template>
+  
+  <script>
+    /**
+     * `heroes-list`
+     * heroes list component
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class HeroesList extends Polymer.Element {
+      static get is() { return 'heroes-list'; }
+      static get properties() {
+        return {
+          heroes: {
+            type: Array,
+            value: function() {
+              return [];
+            },
+          },
+        };
+      }
+    }
+
+    window.customElements.define(HeroesList.is, HeroesList);
+  </script>
+</dom-module>
