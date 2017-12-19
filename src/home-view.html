@@ -19,6 +19,24 @@
     // Your new element extends the Polymer.Element base class
     class HomeView extends Polymer.Element {
       static get is() { return 'home-view'; }
+      static get properties() {
+        return {
+          heroes: {
+            type: Array,
+            value: function() { return []; },
+          },
+        };
+      }
+
+      ready() {
+        super.ready();
+        this.addEventListener('searchBoxDoSearch', this._searchHeroes);
+      }
+      _searchHeroes(event) {
+        console.log(event.detail.value);
+        // this._findHeroes(event.detail.value);
+      }
+
     }
     // Now, register your new custom element so the browser can use it
     customElements.define(HomeView.is, HomeView);
