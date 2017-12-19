@@ -55,7 +55,7 @@
         let params = {
           ts: ts,
           apikey: apikey,
-          hash: md5.hex(ts + privateKey + apikey)
+          hash: md5.hex(ts + privateKey + apikey), // eslint-disable-line no-undef
         };
         if(heroName) {
           params.name = heroName;
@@ -72,7 +72,7 @@
         this.dispatchEvent(
           new CustomEvent('onHeroesFound', {
             composed: true,
-            detail: { value: response },
+            detail: {value: response},
           })
         );
       }
