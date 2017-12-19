@@ -16,6 +16,7 @@
 
     <search-box placeholder="Buscar superhéroe..."></search-box>
     <dp-heroes hero-name={{hero}} id="heroSearch"></dp-heroes>
+
   </template>
   <script>
     // Your new element extends the Polymer.Element base class
@@ -34,6 +35,7 @@
       ready() {
         super.ready();
         this.addEventListener('searchBoxDoSearch', this._searchHeroes);
+        this.addEventListener('onHeroesFound', this._onHeroesFound);
         this.$.heroSearch.doSearch();
       }
 
@@ -45,6 +47,10 @@
       _findHeroes(heroName) {
         this.hero = heroName;
         this.$.heroSearch.doSearch();
+      }
+
+      _onHeroesFound(event) {
+        this.set('heroes', event.detail.value.results);
       }
 
     }
