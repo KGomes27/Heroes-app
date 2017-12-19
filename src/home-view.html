@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/search-box/search-box.html">
 <link rel="import" href="../bower_components/dp-heroes/dp-heroes.html">
+<link rel="import" href="../bower_components/heroes-list/heroes-list.html">
 
 <dom-module id="home-view">
   <!-- Defines the element's style and local DOM -->
@@ -16,6 +17,7 @@
 
     <search-box placeholder="Buscar superhéroe..."></search-box>
     <dp-heroes hero-name={{hero}} id="heroSearch"></dp-heroes>
+    <heroes-list heroes="[[heroes]]"></heroes-list>
 
   </template>
   <script>

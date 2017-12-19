@@ -16,7 +16,8 @@
     "polymer": "Polymer/polymer#^2.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "search-box": "./src/components/search-box/",
-    "dp-heroes": "./src/components/dp-heroes/"
+    "dp-heroes": "./src/components/dp-heroes/",
+    "heroes-list": "./src/components/heroes-list/"
   },
   "resolutions": {
     "polymer": "^2.0.0"
