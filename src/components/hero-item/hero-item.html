@@ -1,13 +1,34 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-image/iron-image.html">
 
 <dom-module id="hero-item">
   <template>
     <style>
       :host {
         display: block;
+        width: 150px;
+        height: 300px;
+        border: solid 2px red;
+        padding: 1rem;
+      }
+      div.hero-item-wrapper {
+        width: 100%;
+        height: 100%;
+      }
+      div.hero-item-wrapper iron-image {
+        width: 100%;
+        height: 200px;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <div class="hero-item-wrapper">
+      <iron-image
+        preload fade
+        src="http://lorempixel.com/600/400"
+        sizing="contain"
+        placeholder="../unknown-hero.jpg">
+      </iron-image>
+      <p>[[hero.name]]</p>
+    </div>
   </template>
 
   <script>
@@ -23,9 +44,11 @@
       static get is() { return 'hero-item'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'hero-item'
+          hero: {
+            type: Object,
+            value: function() {
+              return {};
+            }
           }
         };
       }
