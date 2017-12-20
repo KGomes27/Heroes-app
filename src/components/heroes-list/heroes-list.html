@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../hero-item/hero-item.html">
 
 <dom-module id="heroes-list">
   <template>
@@ -10,9 +11,7 @@
     </style>
 
     <template is="dom-repeat" items="{{heroes}}">
-      <div># [[index]]</div>
-      <p>[[item.name]]</p>
-      <p>[[item.description]]</p>
+      <hero-item hero="[[item]]"></hero-item>
     </template>
 
   </template>
