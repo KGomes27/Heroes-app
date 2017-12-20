@@ -48,7 +48,7 @@
         preload fade
         src="[[hero.thumbnail.path]].[[hero.thumbnail.extension]]"
         sizing="cover"
-        placeholder="../unknown-hero.jpg">
+        placeholder="[[fallbackImage]]">
       </iron-image>
       <div class="hero-data">
         <span>[[hero.name]]</span>
@@ -77,6 +77,10 @@
             value: function() {
               return {};
             },
+          },
+          fallbackImage: {
+            type: String,
+            value: '../unknown-hero.jpg',
           },
         };
       }
