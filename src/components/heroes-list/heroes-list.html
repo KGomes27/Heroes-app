@@ -7,13 +7,22 @@
     <style>
       :host {
         display: block;
+        --hero-item-width: 250px;
+      }
+      .heroes-list-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-gap: 1em;
+        justify-items: center;
       }
     </style>
-
-    <template is="dom-repeat" items="{{heroes}}">
-      <hero-item hero="[[item]]" fallback-image="images/unknown-hero.jpg"></hero-item>
-    </template>
-
+  
+    <div class="heroes-list-wrapper">
+      <template is="dom-repeat" items="{{heroes}}">
+        <hero-item hero="[[item]]" fallback-image="images/unknown-hero.jpg"></hero-item>
+      </template>
+    </div>
+  
   </template>
   
   <script>
