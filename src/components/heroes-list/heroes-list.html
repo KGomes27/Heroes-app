@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
 <link rel="import" href="../hero-item/hero-item.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
 
 <dom-module id="heroes-list">
   <template>
@@ -9,22 +11,40 @@
         display: block;
         --hero-item-width: 250px;
       }
+
       .heroes-list-wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         grid-gap: 1em;
         justify-items: center;
       }
+
+      paper-spinner {
+        display: block;
+        margin: 1rem auto;
+      }
+
+      .empty-results p {
+        text-align: center;
+      }
     </style>
-  
+
+    <paper-spinner active$="{{searching}}"></paper-spinner>
+
+    <div class="empty-results">
+      <template is="dom-if" if="{{_checkLength(heroes)}}">
+        <p>No se encontaron super héroes</p>
+      </template>
+    </div>
+
     <div class="heroes-list-wrapper">
       <template is="dom-repeat" items="{{heroes}}">
         <hero-item hero="[[item]]" fallback-image="images/unknown-hero.jpg"></hero-item>
       </template>
     </div>
-  
+
   </template>
-  
+
   <script>
     /**
      * `heroes-list`
@@ -44,7 +64,15 @@
               return [];
             },
           },
+          searching: {
+            type: Boolean,
+            value: false,
+          },
         };
+      }
+
+      _checkLength() {
+        return !this.searching && this.heroes.length === 0;
       }
     }
 
