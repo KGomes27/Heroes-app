@@ -1,0 +1,37 @@
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="hero-detail-view">
+  <!-- Defines the element's style and local DOM -->
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <h1>[[prop]]</h1>
+
+  </template>
+  <script>
+    // Your new element extends the Polymer.Element base class
+    class HeroDetailView extends Polymer.Element {
+      static get is() { return 'hero-detail-view'; }
+      static get properties() {
+        return {
+          prop: {
+            type: String,
+            value: 'hero detail',
+          },
+        };
+      }
+
+      ready() {
+        super.ready();
+      }
+
+    }
+
+    customElements.define(HeroDetailView.is, HeroDetailView);
+  </script>
+</dom-module>
