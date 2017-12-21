@@ -4,7 +4,8 @@
   "main": "heroes-list.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "hero-item": "../hero-item/"
+    "hero-item": "../hero-item/",
+    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
