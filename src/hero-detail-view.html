@@ -1,5 +1,7 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
 
 <dom-module id="hero-detail-view">
   <!-- Defines the element's style and local DOM -->
@@ -8,10 +10,81 @@
       :host {
         display: block;
       }
+
+      .header {
+        grid-area: header;
+        align-self: start;
+      }
+      .image {
+        grid-area: image;
+      }
+      .info {
+        grid-area: info;
+        text-align: center;
+      }
+      .comic-list {
+        grid-area: comic-list;
+      }
+
+      div.hero-detail-container {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 60px auto auto auto;
+        grid-template-areas: 
+          "header"
+          "image"
+          "info"
+          "comic-list";
+        grid-column-gap: 20px;
+        grid-row-gap: 10px;
+        justify-items: center;
+        align-items: center;
+        margin: 0px 20px 0px 20px;
+      }
+
+      @media (min-width: 500px) {
+        div.hero-detail-container {
+          grid-template-columns: auto 20%;
+          grid-template-rows: 60px auto auto;
+          grid-template-areas: 
+            "header header"
+            "image info"
+            "comic-list comic-list";
+        }
+      }
+
+      div.hero-detail-container iron-image {
+        width: 100%;
+        height: var(--hero-image-height, 300px);
+      }
     </style>
 
-    <h1>[[prop]]</h1>
-
+    <div class="hero-detail-container">
+      <div class="header">
+        <h1 class="hero-name"> 
+          <span>[[selectedHero.name]] </span>
+        </h1>
+      </div>
+      <iron-image preload fade class="image"
+        src="[[selectedHero.thumbnail.path]].[[selectedHero.thumbnail.extension]]"
+        sizing="cover" 
+        placeholder="[[fallbackImage]]"
+      >
+      </iron-image>
+      <div class="info">
+        <span> [[selectedHero.description]] </span>
+      </div>
+      <template is="dom-if" if="{{selectedHero.comics.items.length}}">
+        <div class="comic-list">
+          <h3> Listado de comics </h3>
+          <ol>
+            <template is="dom-repeat" items="{{selectedHero.comics.items}}" as="comic">
+              <li> [[comic.name]] </li>
+            </template>
+          </ol>
+        </div>
+      </template>
+    </div>
   </template>
   <script>
     // Your new element extends the Polymer.Element base class
@@ -19,17 +92,15 @@
       static get is() { return 'hero-detail-view'; }
       static get properties() {
         return {
-          prop: {
-            type: String,
-            value: 'hero detail',
-          },
+          selectedHero: {
+            type: Object
+          }
         };
       }
 
       ready() {
         super.ready();
       }
-
     }
 
     customElements.define(HeroDetailView.is, HeroDetailView);
